@@ -99,7 +99,7 @@ Background agents rodam em git worktrees isolados — perfeitos para tarefas que
 
 **Experimente um Cloud Agent também:**
 
-1. Altere o menu suspenso **Session target** para `Copilot cloud agent`
+1. Altere o menu suspenso **Session target** para `Cloud`
 2. Digite:
    ```
    Make the README more engaging as a landing page to the project

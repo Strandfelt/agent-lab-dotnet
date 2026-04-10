@@ -99,7 +99,7 @@ Los background agents se ejecutan en git worktrees aislados — perfectos para t
 
 **Prueba un Cloud Agent también:**
 
-1. Cambia el menú desplegable **Session target** a `Copilot cloud agent`
+1. Cambia el menú desplegable **Session target** a `Cloud`
 2. Ingresa:
    ```
    Make the README more engaging as a landing page to the project

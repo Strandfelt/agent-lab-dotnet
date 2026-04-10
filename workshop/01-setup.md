@@ -98,7 +98,7 @@ Background agents run in isolated git worktrees — perfect for tasks that don't
 
 **Try a Cloud Agent too:**
 
-1. Change the **Session target** dropdown to `Copilot cloud agent`
+1. Change the **Session target** dropdown to `Cloud`
 2. Enter:
    ```
    Make the README more engaging as a landing page to the project
