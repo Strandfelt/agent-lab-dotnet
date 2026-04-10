@@ -68,7 +68,7 @@ Instructions guide all agentic interactions, making them efficient and reliable.
 
 **Steps:**
 
-1. Run command: `Chat: Generate Workspace Instructions File`
+1. Run command: `Chat: Generate Agent Instructions`
 2. Wait for the agent to analyze your codebase
 3. Review the generated instructions (probably too detailed!)
 4. Follow up with:
@@ -88,7 +88,7 @@ Background agents run in isolated git worktrees — perfect for tasks that don't
 
 **Steps:**
 
-1. Click `+` in Chat → **New background agent**
+1. In the Chat input box, change the **Session target** dropdown (below the text input) from `Local` to `Copilot CLI`
 2. Enter:
    ```
    Add linting rules for unused vars and async/await usage; fix any errors
@@ -98,7 +98,7 @@ Background agents run in isolated git worktrees — perfect for tasks that don't
 
 **Try a Cloud Agent too:**
 
-1. Click `+` → **New cloud agent**
+1. Change the **Session target** dropdown to `Cloud`
 2. Enter:
    ```
    Make the README more engaging as a landing page to the project
