@@ -22,6 +22,16 @@
 - Follow `.github/instructions/css-utilities.instructions.md` and `.github/instructions/frontend-design.instructions.md` for UI tasks.
 - Reference docs: `README.md`, `workshop/GUIDE.md`, `workshop/*.md`, `CONTRIBUTING.md`.
 
+## Design Guide
+- Start with a clear visual direction for each UI change (theme, typography, color mood, interaction tone) before writing markup.
+- Keep visual tokens centralized in `SocOps/wwwroot/css/app.css` using CSS variables; avoid hard-coded one-off colors in components.
+- Prefer reusable semantic classes for component-level styling (`hero`, `banner`, `button`, `card`) and use utility classes for layout/spacing composition.
+- Add purposeful motion for major moments (screen load, button press, success states) and avoid constant decorative animation that competes with gameplay.
+- Preserve readability first: maintain strong text contrast and clear hierarchy for headers, game instructions, and action buttons.
+- Design for mobile and desktop from the start: verify small viewports, tap targets, and overflow behavior.
+- Respect reduced-motion users by providing `prefers-reduced-motion` fallbacks for non-essential animations.
+- Keep celebratory visuals (confetti, party cues) non-blocking and performant; effects must not interfere with tapping squares.
+
 ## Pitfalls
 - Check for port 5166 conflicts before running the app.
 - Do not edit `.solutions/**` unless explicitly requested.

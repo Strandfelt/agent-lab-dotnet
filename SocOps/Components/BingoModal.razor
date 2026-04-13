@@ -1,18 +1,34 @@
-<div class="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-    <div class="bg-white rounded-xl p-6 max-w-xs w-full text-center shadow-xl animate-[bounce_0.5s_ease-out]">
-        <div class="text-5xl mb-4">🎉</div>
-        <h2 class="text-3xl font-bold text-amber-500 mb-2">BINGO!</h2>
-        <p class="text-gray-600 mb-6">You completed a line!</p>
+<div class="party-modal-overlay">
+    <div class="party-modal-card">
+        <div class="modal-crown" aria-hidden="true">🏆 ⚽ 🍺</div>
+        <h2>CHAMPION BINGO!</h2>
+        <p>Your line is complete. The crowd is roaring and confetti is flying.</p>
 
-        <button
-            @onclick="OnDismiss"
-            class="w-full bg-accent text-white font-semibold py-3 px-6 rounded-lg active:bg-accent-light transition-colors">
-            Keep Playing
+        <button id="keep-playing-btn" @onclick="HandleDismiss" class="party-button modal-button">
+            Keep The Party Going
         </button>
     </div>
 </div>
 
 @code {
+    [Inject]
+    private IJSRuntime JS { get; set; } = null!;
+
     [Parameter]
     public EventCallback OnDismiss { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("partyEffects.burst", "bingo");
+        }
+    }
+
+    private async Task HandleDismiss()
+    {
+        await JS.InvokeVoidAsync("partyEffects.pulseButton", "keep-playing-btn");
+        await JS.InvokeVoidAsync("partyEffects.burst", "kickoff");
+        await OnDismiss.InvokeAsync();
+    }
 }

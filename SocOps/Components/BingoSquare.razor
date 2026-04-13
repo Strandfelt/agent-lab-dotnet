@@ -1,19 +1,26 @@
 @using SocOps.Models
 
 <button
-    @onclick="OnClick"
+    @onclick="HandleClick"
     disabled="@Square.IsFreeSpace"
     class="@GetCssClasses()"
     aria-pressed="@Square.IsMarked"
     aria-label="@(Square.IsFreeSpace ? "Free space" : Square.Text)">
+    @if (Square.IsFreeSpace)
+    {
+        <span class="square-icon" aria-hidden="true">⚽</span>
+    }
     <span class="wrap-break-word hyphens-auto">@Square.Text</span>
     @if (Square.IsMarked && !Square.IsFreeSpace)
     {
-        <span class="absolute top-0.5 right-0.5 text-green-600 text-xs">✓</span>
+        <span class="square-check" aria-hidden="true">GOAL</span>
     }
 </button>
 
 @code {
+    [Inject]
+    private IJSRuntime JS { get; set; } = null!;
+
     [Parameter]
     public BingoSquareData Square { get; set; } = null!;
 
@@ -25,16 +32,26 @@
 
     private string GetCssClasses()
     {
-        var baseClasses = "relative flex items-center justify-center p-1 text-center border border-gray-300 rounded transition-all duration-150 select-none min-h-[60px] text-xs leading-tight";
+        var baseClasses = "bingo-square";
 
         var stateClasses = Square.IsMarked
             ? IsWinning
-                ? "bg-amber-200 border-amber-400 text-amber-900"
-                : "bg-marked border-marked-border text-green-800"
-            : "bg-white text-gray-700 active:bg-gray-100";
+                ? "is-winning"
+                : "is-marked"
+            : "is-open";
 
-        var freeSpaceClasses = Square.IsFreeSpace ? "font-bold text-sm" : "";
+        var freeSpaceClasses = Square.IsFreeSpace ? "is-free-space" : "";
 
         return $"{baseClasses} {stateClasses} {freeSpaceClasses}";
+    }
+
+    private async Task HandleClick()
+    {
+        await OnClick.InvokeAsync();
+
+        if (!Square.IsFreeSpace)
+        {
+            await JS.InvokeVoidAsync("partyEffects.burst", "tile");
+        }
     }
 }

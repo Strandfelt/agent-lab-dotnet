@@ -1,26 +1,44 @@
-<div class="flex flex-col items-center justify-center min-h-full p-6 bg-gray-50">
-    <div class="text-center max-w-sm">
-        <h1 class="text-4xl font-bold text-gray-900 mb-2">Soc Ops</h1>
-        <p class="text-lg text-gray-600 mb-8">Social Bingo</p>
+<section class="kickoff-screen">
+    <div class="stadium-lights"></div>
+    <div class="kickoff-card">
+        <p class="match-tag">FIFA PARTY MODE</p>
+        <h1 class="kickoff-title">Soc Ops Cup</h1>
+        <p class="kickoff-subtitle">Stadium cheers, soccer balls, confetti, and party pints all night.</p>
 
-        <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-200 mb-8">
-            <h2 class="font-semibold text-gray-800 mb-3">How to play</h2>
-            <ul class="text-left text-gray-600 text-sm space-y-2">
-                <li>• Find people who match the questions</li>
-                <li>• Tap a square when you find a match</li>
-                <li>• Get 5 in a row to win!</li>
+        <div class="party-icons" aria-hidden="true">
+            <span>⚽</span>
+            <span>🎊</span>
+            <span>🍺</span>
+            <span>🏆</span>
+            <span>⚽</span>
+        </div>
+
+        <div class="rules-card">
+            <h2>Match Rules</h2>
+            <ul>
+                <li>Find fans who match each square.</li>
+                <li>Tap each match to lock it in.</li>
+                <li>Score five in a row and claim the cup.</li>
             </ul>
         </div>
 
-        <button
-            @onclick="OnStart"
-            class="w-full bg-accent text-white font-semibold py-4 px-8 rounded-lg text-lg active:bg-accent-light transition-colors">
-            Start Game
+        <button id="kickoff-btn" @onclick="HandleStart" class="party-button kickoff-button">
+            Kick Off The Party
         </button>
     </div>
-</div>
+</section>
 
 @code {
+    [Inject]
+    private IJSRuntime JS { get; set; } = null!;
+
     [Parameter]
     public EventCallback OnStart { get; set; }
+
+    private async Task HandleStart()
+    {
+        await JS.InvokeVoidAsync("partyEffects.pulseButton", "kickoff-btn");
+        await JS.InvokeVoidAsync("partyEffects.burst", "kickoff");
+        await OnStart.InvokeAsync();
+    }
 }
