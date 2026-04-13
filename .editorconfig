@@ -1,0 +1,41 @@
+# EditorConfig for C# projects
+# https://editorconfig.org
+
+root = true
+
+[*]
+indent_style = space
+indent_size = 4
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.cs]
+# Organize usings
+dotnet_sort_system_directives_first = true
+dotnet_separate_import_directive_groups = false
+
+# var preferences
+csharp_style_var_for_built_in_types = true:suggestion
+csharp_style_var_when_type_is_apparent = true:suggestion
+csharp_style_var_elsewhere = true:suggestion
+
+# Unused parameters
+dotnet_code_quality_unused_parameters = all:warning
+
+# IDE warnings — unused variables and members
+dotnet_diagnostic.IDE0051.severity = warning  # Remove unused private member
+dotnet_diagnostic.IDE0052.severity = warning  # Remove unread private member
+dotnet_diagnostic.IDE0059.severity = warning  # Unnecessary assignment of a value
+dotnet_diagnostic.IDE0060.severity = warning  # Remove unused parameter
+
+# Compiler warnings — async/await
+dotnet_diagnostic.CS1998.severity = warning   # Async method lacks 'await' operators
+dotnet_diagnostic.CS4014.severity = warning   # Call is not awaited
+
+[*.{json,yml,yaml}]
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false
